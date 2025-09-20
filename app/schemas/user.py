@@ -81,6 +81,7 @@ class TokenData(BaseModel):
 
 # School student schema
 class StudentSchool(BaseModel):
+    id: int
     full_name: str
     classes: Optional[int]
     email: str
@@ -95,6 +96,7 @@ class Config:
 
 # College student schema
 class StudentCollege(BaseModel):
+    id: int
     full_name: str
     department: Optional[str]
     email: str
@@ -115,6 +117,7 @@ class StudentResponse(BaseModel):
 
 # ---------------------- Teacher Schemas ----------------------
 class TeacherSchool(BaseModel):
+    id: int
     full_name: str
     subject: Optional[str]
     email: str
@@ -128,6 +131,7 @@ class TeacherSchool(BaseModel):
 
 
 class TeacherCollege(BaseModel):
+    id: int
     full_name: str
     department: Optional[str]
     email: str

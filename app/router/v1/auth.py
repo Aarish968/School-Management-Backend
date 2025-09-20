@@ -172,6 +172,7 @@ def get_students(db: Session = Depends(get_db)):
             if s.institution_type == "school":
                 school_students.append(
                     StudentSchool(
+                        id=s.id,
                         full_name=s.full_name,
                         classes=s.classes,
                         email=s.email,
@@ -181,6 +182,7 @@ def get_students(db: Session = Depends(get_db)):
             elif s.institution_type == "college":
                 college_students.append(
                     StudentCollege(
+                        id=s.id,
                         full_name=s.full_name,
                         department=s.department,
                         email=s.email,
@@ -209,6 +211,7 @@ def get_teachers(db: Session = Depends(get_db)):
             if t.institution_type == "school":
                 school_teachers.append(
                     TeacherSchool(
+                    id=t.id,
                     full_name=t.full_name,
                     subject=t.subject,
                     email=t.email,
@@ -218,6 +221,7 @@ def get_teachers(db: Session = Depends(get_db)):
             elif t.institution_type == "college":
                 college_teachers.append(
                     TeacherCollege(
+                    id=t.id,
                     full_name=t.full_name,
                     department=t.department,
                     email=t.email,

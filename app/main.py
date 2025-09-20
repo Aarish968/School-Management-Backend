@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 # from app.db import Base
 from db import engine
 from base import Base
-from router.v1 import auth, users, students, courses, grades
+from router.v1 import auth, users, attendance
 
 # Create database tables
 Base.metadata.create_all(bind=engine)
@@ -36,9 +36,10 @@ app.add_middleware(
 # Include routers
 app.include_router(auth.router, prefix="/api/v1/auth", tags=["authentication"])
 app.include_router(users.router, prefix="/api/v1/users", tags=["users"])
-app.include_router(students.router, prefix="/api/v1/students", tags=["students"])
-app.include_router(courses.router, prefix="/api/v1/courses", tags=["courses"])
-app.include_router(grades.router, prefix="/api/v1/grades", tags=["grades"])
+app.include_router(attendance.router, prefix="/api/v1", tags=["attendance"])
+# app.include_router(students.router, prefix="/api/v1/students", tags=["students"])
+# app.include_router(courses.router, prefix="/api/v1/courses", tags=["courses"])
+# app.include_router(grades.router, prefix="/api/v1/grades", tags=["grades"])
 
 
 @app.get("/")
