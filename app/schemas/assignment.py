@@ -1,4 +1,5 @@
-from pydantic import BaseModel, field_serializer
+from pydantic import BaseModel, field_serializer, model_serializer
+from fastapi import Request
 from typing import List, Optional
 from datetime import date, time
 from .user import UserOut
@@ -16,21 +17,33 @@ class AssignmentBase(BaseModel):
 class AssignmentCreate(AssignmentBase):
     students: List[int] = []
 
+
 class AttachmentOut(BaseModel):
     id: int
     filename: str
+    filepath: str
 
     class Config:
         orm_mode = True
+
+    @model_serializer
+    def serialize(self, _):
+        base_url = "http://localhost:8000"   # 🔒 Hardcoded
+        return {
+            "id": self.id,
+            "filename": self.filename,
+            "filepath": f"{base_url}{self.filepath}"
+        }
 
 
 class AssignmentOut(AssignmentBase):
     id: int
-    students: List[UserOut] = []  # ✅ student IDs only
+    students: List[UserOut] = []
     attachments: List[AttachmentOut] = []
 
     class Config:
         orm_mode = True
+        from_attributes=True
 
     @field_serializer("students")
     def serialize_students(self, students):
