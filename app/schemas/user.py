@@ -5,14 +5,28 @@ from datetime import datetime
 
 # Base for creating users (required fields)
 class UserBase(BaseModel):
-    email: EmailStr
-    username: str
-    full_name: str
-    role: str = "user"
+    id: int
+    email: str
+    full_name: Optional[str]
+    role: str
+    institution_type: Optional[str]   # ✅ include this
+
+    
+    class Config:
+        from_attributes=True
+        orm_mode = True
 
 
 class UserCreate(UserBase):
     password: str
+
+
+class UserOut(BaseModel):
+    id: int
+    # name: str  # or whatever fields you want to expose
+
+    class Config:
+        orm_mode = True
 
 
 # ---------------------- Updates Schemas ----------------------
@@ -71,6 +85,7 @@ class UserLogin(BaseModel):
 class Token(BaseModel):
     access_token: str
     token_type: str
+    user: UserBase
 
 
 class TokenData(BaseModel):

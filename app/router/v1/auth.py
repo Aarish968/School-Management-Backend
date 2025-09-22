@@ -49,7 +49,7 @@ def login_access_token(user: UserLogin, db: Session = Depends(get_db)) -> Any:
             data={"sub": user_obj.email}, expires_delta=access_token_expires
         ),
         "token_type": "bearer",
-        "user": user_obj  # Add this line to return user data
+        "user": user_obj # Add this line to return user data
     }
 
 

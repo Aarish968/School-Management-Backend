@@ -3,9 +3,10 @@ from fastapi.middleware.cors import CORSMiddleware
 # from core.config import settings
 # from app.db import engine
 # from app.db import Base
+from fastapi.staticfiles import StaticFiles
 from db import engine
 from base import Base
-from router.v1 import auth, users, attendance
+from router.v1 import auth, users, attendance, assignment
 
 # Create database tables
 Base.metadata.create_all(bind=engine)
@@ -18,6 +19,9 @@ app = FastAPI(
     docs_url="/docs",
     redoc_url="/redoc"
 )
+
+# Mount static folder for uploads
+app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
 
 app.add_middleware(
     CORSMiddleware,
@@ -34,10 +38,10 @@ app.add_middleware(
 
 
 # Include routers
-app.include_router(auth.router, prefix="/api/v1/auth", tags=["authentication"])
-app.include_router(users.router, prefix="/api/v1/users", tags=["users"])
-app.include_router(attendance.router, prefix="/api/v1", tags=["attendance"])
-# app.include_router(students.router, prefix="/api/v1/students", tags=["students"])
+app.include_router(auth.router, prefix="/api/v1/auth", tags=["Authentication"])
+app.include_router(users.router, prefix="/api/v1/users", tags=["Users"])
+app.include_router(attendance.router, prefix="/api/v1", tags=["Attendance"])
+app.include_router(assignment.router, prefix="/api/v1", tags=["Assignment"])
 # app.include_router(courses.router, prefix="/api/v1/courses", tags=["courses"])
 # app.include_router(grades.router, prefix="/api/v1/grades", tags=["grades"])
 

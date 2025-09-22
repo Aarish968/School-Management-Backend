@@ -8,7 +8,7 @@ from datetime import datetime
 from typing import List
 from router.deps import get_current_active_user
 
-router = APIRouter(prefix="/attendance", tags=["attendance"])
+router = APIRouter(prefix="/attendance")
 
 # ---------------------------✅ POST ------------------------
 @router.post("/", response_model=AttendanceOut)

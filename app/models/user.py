@@ -1,7 +1,9 @@
+# models/user.py
 from sqlalchemy import Boolean, Column, Integer, String, DateTime
 from sqlalchemy.sql import func
-# from app.base import Base
+from sqlalchemy.orm import relationship
 from base import Base
+# from app.base import Base
 
 
 class User(Base):
@@ -18,14 +20,16 @@ class User(Base):
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
 
-    # New fields
     image = Column(String, nullable=True)
     address = Column(String, nullable=True)
     teacher_dept_id = Column(Integer, nullable=True)
     age = Column(Integer, nullable=True)
 
-    # New fields
     subject = Column(String, nullable=True)
     classes = Column(Integer, nullable=True)
     department = Column(String, nullable=True)
     institution_type = Column(String, nullable=True)
+
+    # Relations
+    teacher_attendances = relationship("Attendance", foreign_keys="[Attendance.teacher_id]", back_populates="teacher")
+    student_attendances = relationship("Attendance", foreign_keys="[Attendance.student_id]", back_populates="student")
