@@ -5,11 +5,10 @@ from datetime import datetime
 
 # Base for creating users (required fields)
 class UserBase(BaseModel):
-    id: int
     email: str
     full_name: Optional[str]
     role: str
-    institution_type: Optional[str]   # ✅ include this
+    institution_type: Optional[str] = None   # ✅ include this
 
     
     class Config:
@@ -19,6 +18,7 @@ class UserBase(BaseModel):
 
 class UserCreate(UserBase):
     password: str
+    username: Optional[str] = None
 
 
 class UserOut(BaseModel):
@@ -82,10 +82,22 @@ class UserLogin(BaseModel):
     password: str
 
 
+class UserTokenResponse(BaseModel):
+    id: int
+    email: str
+    full_name: Optional[str]
+    role: str
+    institution_type: Optional[str]
+    
+    class Config:
+        from_attributes = True
+        orm_mode = True
+
+
 class Token(BaseModel):
     access_token: str
     token_type: str
-    user: UserBase
+    user: UserTokenResponse
 
 
 class TokenData(BaseModel):

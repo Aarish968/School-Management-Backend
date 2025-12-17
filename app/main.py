@@ -34,8 +34,8 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
-    CORS_ALLOW_ALL_ORIGINS = True,
-    CORS_ALLOW_CREDENTIALS = True
+    # CORS_ALLOW_ALL_ORIGINS = True,
+    # CORS_ALLOW_CREDENTIALS = True
 )
 
 

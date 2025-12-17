@@ -55,7 +55,7 @@ def login_access_token(user: UserLogin, db: Session = Depends(get_db)) -> Any:
 
 # ---------------------- Register Api ----------------------
 
-@router.post("/register", response_model=User)
+@router.post("/register", response_model=Token)
 def register_user(
     *,
     db: Session = Depends(get_db),
@@ -72,7 +72,18 @@ def register_user(
         )
     
     user = create_user(db, user=user_in)
-    return user
+    
+    # Create access token for the new user
+    access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
+    access_token = create_access_token(
+        data={"sub": user.email}, expires_delta=access_token_expires
+    )
+    
+    return {
+        "access_token": access_token,
+        "token_type": "bearer",
+        "user": user
+    }
 
 
 # ---------------------- Auth Me Api ----------------------
