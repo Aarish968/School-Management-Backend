@@ -1,11 +1,8 @@
+# models/__init__.py
 from .user import User
+from .payment import Payment
 from .attendance import Attendance
-from .attachment import Attachment
 from .assignment import Assignment
+from .attachment import Attachment
 
-__all__ = [
-    "User",
-    "Attendance",
-    "Assignment",
-    "Attachment"
-]
+__all__ = ["User", "Payment", "Attendance", "Assignment", "Attachment"]

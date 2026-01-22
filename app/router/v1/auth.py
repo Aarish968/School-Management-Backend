@@ -5,12 +5,12 @@ from typing import Any, List, Union
 from fastapi import APIRouter, Depends, HTTPException, status, Form, UploadFile, File, Query
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
-from db import get_db
-from models.user import User as UserModel
-from core.config import settings
-from core.security import create_access_token, verify_token
-from crud.user import authenticate_user, create_user, get_user_by_email, update_user
-from schemas.user import (User,
+from app.db import get_db
+from app.models.user import User as UserModel
+from app.core.config import settings
+from app.core.security import create_access_token, verify_token
+from app.crud.user import authenticate_user, create_user, get_user_by_email, update_user
+from app.schemas.user import (User,
 UserCreate,
 Token, 
 UserLogin, 
@@ -20,7 +20,7 @@ UserUpdate,
 StudentSchool, 
 StudentCollege, 
 StudentResponse, TeacherResponse, TeacherCollege, TeacherSchool)
-from router.deps import get_current_active_user
+from app.router.deps import get_current_active_user
 
 router = APIRouter()
 

@@ -10,6 +10,10 @@ class Settings(BaseSettings):
     DATABASE_NAME: str
     DATABASE_USER: str
     DATABASE_PASSWORD: str
+
+    # Razorpay Settings
+    RAZORPAY_KEY_ID: str = "rzp_test_S6saCTUVL3j21k"
+    RAZORPAY_KEY_SECRET: str = "v9VVs4eO5664j2HEWuQFlYe7" 
     
     @property
     def DATABASE_URL(self) -> str:
@@ -23,6 +27,7 @@ class Settings(BaseSettings):
     SECRET_KEY: str = "your-secret-key-change-in-production"
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
+    
     
     
     # Pagination

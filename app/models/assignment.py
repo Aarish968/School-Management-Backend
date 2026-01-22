@@ -1,7 +1,6 @@
 from sqlalchemy import Column, Integer, String, Date, Time, ForeignKey, Text, DateTime, func, Table
 from sqlalchemy.orm import relationship
-from base import Base
-# from app.base import Base
+from app.base import Base
 
 
 assignment_students = Table(

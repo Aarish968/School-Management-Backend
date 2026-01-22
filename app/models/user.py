@@ -2,8 +2,7 @@
 from sqlalchemy import Boolean, Column, Integer, String, DateTime
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
-from base import Base
-# from app.base import Base
+from app.base import Base
 
 
 class User(Base):
@@ -33,3 +32,4 @@ class User(Base):
     # Relations
     teacher_attendances = relationship("Attendance", foreign_keys="[Attendance.teacher_id]", back_populates="teacher")
     student_attendances = relationship("Attendance", foreign_keys="[Attendance.student_id]", back_populates="student")
+    payments = relationship("Payment", back_populates="student")

@@ -1,9 +1,9 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import and_
 from typing import Optional, List
-from models import User
-from schemas.user import UserCreate, UserUpdate
-from core.security import get_password_hash, verify_password
+from app.models.user import User
+from app.schemas.user import UserCreate, UserUpdate
+from app.core.security import get_password_hash, verify_password
 
 
 def get_user(db: Session, user_id: int) -> Optional[User]:
@@ -48,7 +48,7 @@ def update_user(db: Session, user_id: int, user_update: UserUpdate) -> Optional[
     if not db_user:
         return None
     
-    update_data = user_update.dict(exclude_unset=True)
+    update_data = user_update.model_dump(exclude_unset=True)
     for field, value in update_data.items():
         setattr(db_user, field, value)
     

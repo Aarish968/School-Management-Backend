@@ -1,12 +1,12 @@
 # routers/attendance.py
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from db import get_db
-from models.attendance import Attendance
-from schemas.attendance import AttendanceCreate, AttendanceOut
+from app.db import get_db
+from app.models.attendance import Attendance
+from app.schemas.attendance import AttendanceCreate, AttendanceOut
 from datetime import datetime
 from typing import List
-from router.deps import get_current_active_user
+from app.router.deps import get_current_active_user
 
 router = APIRouter(prefix="/attendance")
 

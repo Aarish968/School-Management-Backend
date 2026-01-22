@@ -2,7 +2,7 @@ from pydantic import BaseModel, field_serializer, model_serializer
 from fastapi import Request
 from typing import List, Optional
 from datetime import date, time
-from .user import UserOut
+from app.schemas.user import UserOut
 
 
 class AssignmentBase(BaseModel):

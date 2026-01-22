@@ -3,12 +3,12 @@ from fastapi import APIRouter, Depends, UploadFile, File, Form, Request, HTTPExc
 from sqlalchemy.orm import Session
 from typing import List, Optional
 from datetime import date, time
-from models.assignment import Assignment
-from models.attachment import Attachment
-from models.user import User
-from schemas.assignment import AssignmentOut
-from router.deps import get_current_active_user
-from db import get_db
+from app.models.assignment import Assignment
+from app.models.attachment import Attachment
+from app.models.user import User
+from app.schemas.assignment import AssignmentOut
+from app.router.deps import get_current_active_user
+from app.db import get_db
 
 UPLOAD_DIR = "uploads/"
 os.makedirs(UPLOAD_DIR, exist_ok=True)

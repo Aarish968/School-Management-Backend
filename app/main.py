@@ -1,12 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-# from core.config import settings
-# from app.db import engine
-# from app.db import Base
 from fastapi.staticfiles import StaticFiles
-from db import engine
-from base import Base
-from router.v1 import auth, users, attendance, assignment
+from app.db import engine
+from app.base import Base
+from app.router.v1 import auth, users, attendance, assignment, payment
 
 # Create database tables
 Base.metadata.create_all(bind=engine)
@@ -21,7 +18,7 @@ app = FastAPI(
 )
 
 # Mount static folder for uploads
-app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
+app.mount("/uploads", StaticFiles(directory="app/uploads"), name="uploads")
 
 app.add_middleware(
     CORSMiddleware,
@@ -44,6 +41,7 @@ app.include_router(auth.router, prefix="/api/v1/auth", tags=["Authentication"])
 app.include_router(users.router, prefix="/api/v1/users", tags=["Users"])
 app.include_router(attendance.router, prefix="/api/v1", tags=["Attendance"])
 app.include_router(assignment.router, prefix="/api/v1", tags=["Assignment"])
+app.include_router(payment.router, prefix="/api/v1/payment", tags=["Payment"])
 # app.include_router(courses.router, prefix="/api/v1/courses", tags=["courses"])
 # app.include_router(grades.router, prefix="/api/v1/grades", tags=["grades"])
 

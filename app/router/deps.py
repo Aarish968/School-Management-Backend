@@ -2,9 +2,9 @@ from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from sqlalchemy.orm import Session
 from typing import Optional
-from db import get_db
-from core.security import verify_token
-from crud.user import get_user
+from app.db import get_db
+from app.core.security import verify_token
+from app.crud.user import get_user
 
 security = HTTPBearer()
 
@@ -61,5 +61,5 @@ def get_current_superuser(current_user = Depends(get_current_user)):
 
 def get_user_by_email_helper(db: Session, email: str):
     """Get user by email - helper function."""
-    from crud.user import get_user_by_email
+    from app.crud.user import get_user_by_email
     return get_user_by_email(db, email=email)
