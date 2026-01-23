@@ -33,3 +33,11 @@ class User(Base):
     teacher_attendances = relationship("Attendance", foreign_keys="[Attendance.teacher_id]", back_populates="teacher")
     student_attendances = relationship("Attendance", foreign_keys="[Attendance.student_id]", back_populates="student")
     payments = relationship("Payment", back_populates="student")
+    
+    # Grade relations
+    student_grades = relationship("Grade", foreign_keys="[Grade.student_id]", back_populates="student")
+    teacher_grades = relationship("Grade", foreign_keys="[Grade.teacher_id]", back_populates="teacher")
+    
+    # Report card relations
+    student_report_cards = relationship("ReportCard", foreign_keys="[ReportCard.student_id]", back_populates="student")
+    teacher_report_cards = relationship("ReportCard", foreign_keys="[ReportCard.teacher_id]", back_populates="teacher")

@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from app.db import engine
 from app.base import Base
-from app.router.v1 import auth, users, attendance, assignment, payment
+from app.router.v1 import auth, users, attendance, assignment, payment, subject, grade, report_card
 
 # Create database tables
 Base.metadata.create_all(bind=engine)
@@ -42,6 +42,9 @@ app.include_router(users.router, prefix="/api/v1/users", tags=["Users"])
 app.include_router(attendance.router, prefix="/api/v1", tags=["Attendance"])
 app.include_router(assignment.router, prefix="/api/v1", tags=["Assignment"])
 app.include_router(payment.router, prefix="/api/v1/payment", tags=["Payment"])
+app.include_router(subject.router, prefix="/api/v1/subjects", tags=["Subjects"])
+app.include_router(grade.router, prefix="/api/v1/grades", tags=["Grades"])
+app.include_router(report_card.router, prefix="/api/v1/report-cards", tags=["Report Cards"])
 # app.include_router(courses.router, prefix="/api/v1/courses", tags=["courses"])
 # app.include_router(grades.router, prefix="/api/v1/grades", tags=["grades"])
 
